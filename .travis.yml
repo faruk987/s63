@@ -1,5 +1,11 @@
-matrix:
-  include:
-    - language: java
-    
-    - language: node.js
+sudo: required
+language: java
+dist: trusty
+jdk:
+  - oraclejdk11
+
+services:
+  - docker
+
+script:
+  - ./mvnw clean install -B
