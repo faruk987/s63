@@ -27,5 +27,6 @@ jobs:
       with:
         image: farukaydin7/s6
         registry: docker.io
+        dockerfile: src/main/docker/Dockerfile.jvm
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}  
