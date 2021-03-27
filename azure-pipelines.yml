@@ -40,4 +40,4 @@ stages:
       inputs:
         repository: 'farukaydin7/quarkus-demo'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'src/main/docker/Dockerfile.jvm'
