@@ -9,23 +9,36 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    testRunTitle: 'Test Quarkus'
-    codeCoverageToolOption: 'JaCoCo'
-    codeCoverageRestoreOriginalPomXml: true
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-
-- task: Docker@2
-  inputs:
-    repository: 'farukaydin7/s6'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+#Stage 1: Build Maven and run tests
+stages:
+- stage: BuildAndTest
+  displayName: Maven Tests & Create Docker Image
+  jobs:
+  - job: BuildAndTest
+    steps:
+  
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        testRunTitle: 'Test Quarkus'
+        codeCoverageToolOption: 'JaCoCo'
+        codeCoverageRestoreOriginalPomXml: true
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+        goals: 'package'
+    - task: DockerInstaller@0
+      displayName: Install Docker
+      inputs:
+        dockerVersion: '17.09.0-ce'
+    - task: Docker@2
+      displayName: Docker BuildAndPush
+      inputs:
+        containerRegistry: 'ContainerRegistryFaruk'
+        repository: 'farukaydin7/quarkus-demo'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
