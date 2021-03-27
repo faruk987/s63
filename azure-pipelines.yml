@@ -10,9 +10,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -26,3 +23,9 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
+
+- task: Docker@2
+  inputs:
+    repository: 'farukaydin7/s6'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
