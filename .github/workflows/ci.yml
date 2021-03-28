@@ -48,6 +48,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: jacoco-report
+        path: target/site/jacoco/
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
