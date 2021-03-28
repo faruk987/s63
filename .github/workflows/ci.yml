@@ -22,22 +22,14 @@ jobs:
         java-version: 13
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    
-    - name: Upload Report
-      uses: 'actions/upload-artifact@v2'
+      
+    - uses: codecov/codecov-action@v1
       with:
-        name: report.xml
-        path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
-
-    - name: Jacoco Report to PR
-      id: jacoco
-      uses: madrapps/jacoco-report@v1.1
-      with:
-        path: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
-        token: ${{ secrets.TOKEN }}
-        min-coverage-overall: 40
-        min-coverage-changed-files: 60
-        debug-mode: false
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+        verbose: true # optional (default = false)
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
