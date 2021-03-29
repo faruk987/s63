@@ -1,5 +1,4 @@
-(https://github.com/faruk987/s63/.github/badges/jacoco.svg)
-![example workflow](https://github.com/faruk987/s63/badges/jacoco.svg)
+![example workflow](https://github.com/faruk987/s63/blob/main/.github/badges/jacoco.svg)
 
 # code-with-quarkus project
 
