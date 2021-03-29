@@ -1,4 +1,6 @@
 (https://github.com/faruk987/s63/.github/badges/jacoco.svg)
+![example workflow](https://github.com/faruk987/s63/badges/jacoco.svg)
+
 # code-with-quarkus project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
