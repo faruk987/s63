@@ -43,6 +43,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+        
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
